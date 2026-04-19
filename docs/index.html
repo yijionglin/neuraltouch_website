@@ -3,24 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="NeuralTouch integrates neural descriptor fields and tactile sensing for precise sim-to-real robotic grasping and manipulation.">
+  <meta name="keywords" content="NeuralTouch, tactile sensing, robotics, neural descriptor fields, sim-to-real">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AnyRotate: Gravity Invariant In-Hand Rotation with Sim-to-Real Touch</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <title>NeuralTouch: Neural Descriptors for Precise Sim-to-Real Tactile Robot Control</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -40,18 +26,17 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       var observer;
       var options = {
-        root: null, // sets the framing element to the viewport
-        rootMargin: '0px',
-        threshold: 0.5 // trigger when 50% of the video is visible
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.5
       };
-  
-      var callback = function(entries, observer) { 
-        entries.forEach(entry => {
+
+      var callback = function(entries) {
+        entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.play();
           } else {
@@ -59,124 +44,117 @@
           }
         });
       };
-  
+
       observer = new IntersectionObserver(callback, options);
-      
-      // Select multiple videos by ID
-      var targets = [document.getElementById('teaser'),
-      document.getElementById('tactile_prediction'),
-      document.getElementById('rand_axis'),
-      document.getElementById('rand_objects'),
-      document.getElementById('perturb'),
-      document.getElementById('gravity_demo')];
-      
-      // Observe each video
+
+      var targets = [
+        document.getElementById("teaser"),
+        document.getElementById("sim_only_demo"),
+        document.getElementById("ketchup_demo"),
+        document.getElementById("multi_cap_demo_0"),
+        document.getElementById("multi_cap_demo_1"),
+        document.getElementById("multi_cap_comparison_0"),
+        document.getElementById("multi_cap_comparison_1"),
+        document.getElementById("multi_cap_comparison_2"),
+        document.getElementById("rw_objects_ketchup"),
+        document.getElementById("rw_objects_green_bolt"),
+        document.getElementById("rw_objects_pink_bolt"),
+        document.getElementById("rw_objects_plug"),
+        document.getElementById("green_bolt_demo"),
+        document.getElementById("bolt_demo"),
+        document.getElementById("plug_demo"),
+        document.getElementById("usb_demo"),
+        document.getElementById("obj_tracking_demo")
+      ];
+
       targets.forEach(function(target) {
-        if (target) observer.observe(target);
+        if (target) {
+          observer.observe(target);
+        }
       });
     });
   </script>
-
 </head>
 
 <style>
   .responsive-video {
-    width: 100%;    /* Adjust width as needed */
-    height: auto;   /* Maintain aspect ratio */
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-video-background {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background: #000000;
+  }
+
+  .hero-video-background .hero-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000000;
+    z-index: 0;
+  }
+
+  .hero-video-background .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.38);
+    z-index: 1;
+  }
+
+  .hero-video-background .hero-body {
+    position: relative;
+    z-index: 2;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-video-background .publication-title,
+  .hero-video-background .publication-authors,
+  .hero-video-background .subtitle {
+    color: #ffffff;
+  }
+
+  .hero-video-background .publication-authors a {
+    color: #ffffff !important;
   }
 </style>
 
 <body>
 
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
-
-
-<section class="hero">
+<section class="hero hero-video-background">
+  <video class="hero-bg-video" autoplay muted loop playsinline>
+    <source src="./static/videos/cover_video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-bg-overlay"></div>
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-2 publication-title">AnyRotate: Gravity Invariant In-Hand Object Rotation with Sim-to-Real Touch</h1>
+          <h1 class="title is-2 publication-title">NeuralTouch: Neural Descriptors for Precise Sim-to-Real Tactile Robot Control</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://maxyang27896.github.io/">Max Yang</a>,</span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://scholar.google.com/citations?user=aXnQjHoAAAAJ&hl=en">Chenghua Lu</a>,</span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://scholar.google.com/citations?user=D7eIiqwAAAAJ&hl=en">Alex Church</a>,
-            </span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://yijionglin.github.io/">Yijiong Lin</a>,
-            </span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://scholar.google.com/citations?user=uWTWIM0AAAAJ&hl=en">Chris Ford</a>,
-            </span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://haoran-li.com/">Haoran Li</a>,
-            </span>
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://scholar.google.gr/citations?user=kVyW-LEAAAAJ&hl=en">Efi Psomopoulou</a>,
-            </span>
-            <br> 
-            <span class="author-block" style="margin-right: 5px;">
-              <a href="https://cityinthesky.co.uk/">David A.W. Barton</a>,
-            </span>
-            <span class="author-block" style="margin-right: 5px; margin-bottom: 5px;">
-              <a href="https://lepora.com/">Nathan F. Lepora</a>
-            </span>
+            <span class="author-block" style="margin-right: 5px;">Yijiong Lin,</span>
+            <span class="author-block" style="margin-right: 5px;">Bowen Deng,</span>
+            <span class="author-block" style="margin-right: 5px;">Keju Pu,</span>
+            <span class="author-block" style="margin-right: 5px;">Chenghua Lu,</span>
+            <span class="author-block" style="margin-right: 5px;">Max Yang,</span>
+            <span class="author-block" style="margin-right: 5px;">Efi Psomopoulou,</span>
+            <span class="author-block" style="margin-right: 5px;">Nathan F. Lepora</span>
           </div>
 
           <div class="is-size-5 publication-authors" style="margin-bottom: 5px;">
-            <span class="author-block">University of Bristol</span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><b><i>Conference on Robot Learning (CoRL) 2024</i></b></span>
+            <span class="author-block">Department of Engineering Mathematics and Bristol Robotics Laboratory, University of Bristol</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2405.07391"
+                <a href="https://arxiv.org/pdf/2510.20390"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -184,18 +162,26 @@
                   <span>Paper</span>
                 </a>
               </span>
-              <!-- <span class="link-block">
-                <a href=""
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2510.20390"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv (coming soon)</span>
+                  <span>arXiv</span>
                 </a>
-              </span> -->
-              <!-- Video Link. -->
+              </span>
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=0pli0-QvTgc"
+                <a href="https://github.com/yijionglin/neuraltouch_website"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#results"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-youtube"></i>
@@ -203,19 +189,7 @@
                   <span>Video</span>
                 </a>
               </span>
-              <!-- Code Link. -->
-              <!-- <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code (coming soon)</span>
-                  </a>
-              </span> -->
-                  </a>
             </div>
-
           </div>
         </div>
       </div>
@@ -223,201 +197,186 @@
   </div>
 </section>
 
-<section class="hero teaser" style="margin-top: -40px;">
+<!-- <section class="hero teaser" style="margin-top: -40px;">
   <div class="container">
     <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/first_video_revised.mov"
+      <video id="teaser" autoplay muted loop playsinline height="100%" controls>
+        <source src="./static/videos/neuraltouch_revision_video.mp4"
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        Multi-axis in-hand object rotation invariant to gravity direction using dense featured sim-to-real touch.
+        NeuralTouch combines coarse neural-descriptor guidance with fine tactile servoing for accurate sim-to-real grasping and precise manipulation.
       </h2>
-    </div>
-  </div>
-</section>
-
-
-<!-- <section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
     </div>
   </div>
 </section> -->
 
-
-<section class="section" style="background-color: #f5f5f5;">
-  <div class="container is-max-desktop ">
-    <!-- Abstract. -->
+<section class="section" style="background-color: #ffffff;">
+  <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-sixths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            In-hand manipulation is an integral component of human dexterity. Our hands rely on tactile feedback for 
-            stable and reactive motions to ensure objects do not slip away unintentionally during manipulation. 
-            For a robot hand, this level of dexterity requires extracting and utilizing rich contact information for precise motor control. 
-            In this paper we present AnyRotate, a system for gravity-invariant multi-axis in-hand object rotation using dense featured sim-to-real touch. 
-            Our policy is trained in simulation with rich tactile feedback and zero-shot transferred to the real-world. 
-            We introduce an approach for bridging the sim-to-real gap for a dense tactile representation. 
-            Our experiments highlight the benefit of detailed contact information when handling objects with varying properties. 
-            In the real world, we demonstrate a successful transfer of the dense tactile policy, generalizing to a diverse range of 
-            objects for various rotation axes and hand directions, outperforming other forms of low-dimensional touch. 
-            Interestingly, despite not having explicit slip detection, rich multi-fingered tactile sensing can implicitly detect object 
-            movement within grasp and provide a reactive behavior that improves the robustness of the policy, 
-            highlighting the importance of information-rich tactile sensing for in-hand manipulation.
+            Grasping accuracy is a critical prerequisite for precise object manipulation that may require careful alignment
+            between the robot hand and an object. Neural Descriptor Fields (NDFs) offer a promising vision-based method to
+            generate grasping poses that generalize across object categories. However, NDFs alone can produce inaccurate poses
+            due to imperfect camera calibration, incomplete point clouds, and object variability. Alternatively, tactile sensing
+            enables more precise contact, but existing approaches limit policies to simple predefined contact geometries.
+          </p>
+          <p>
+            In this work, we introduce NeuralTouch, a multimodal framework that integrates NDFs and tactile sensing to enable
+            accurate generalizable grasping through gentle physical interaction. Our approach leverages NDFs to implicitly
+            represent the target contact geometry, from which a deep reinforcement learning policy is trained to refine the grasp
+            using tactile feedback. This policy is conditioned on the neural descriptors and does not require explicit specification
+            of contact types. We validate NeuralTouch through ablation studies in simulation and with zero-shot transfer to
+            real-world manipulation tasks, such as peg-out/in-hole and bottle lid opening. Our results show that NeuralTouch
+            significantly improves grasping accuracy and robustness over baseline methods.
           </p>
         </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-
-    <!-- Paper video. -->
-    <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-four-sixths">
-        <h2 class="title is-3">Teaser Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div> -->
-    <!--/ Paper video. -->
-  </div>
-</section>
-
-<section class="section" style="background-color: #f5f5f5;" >
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-sixths">
-          <h2 class="title is-3" style="margin-top: -50px;">Hardware</h2>
-          <img src="./static/images/system.png"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."
-                 style="margin-top: 10px; margin-bottom: 10px;"/>
-          <p style="margin-top: 10px; margin-bottom: 10px;">
-            We Use the allegro hand (16 DoF) with tactile sensors attached on the fingertips.
-          </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- <section class="section";>
+<section class="section" style="background-color: #ffffff;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-sixths">
-          <h2 class="title is-3">Goal-Guided Training</h2>
-            <img src="./static/images/rma_diagram_1.drawio.png"
-                  class="interpolation-image"
-                  alt="Interpolate start reference image."
-                  style="margin-top: 10px; margin-bottom: 10px;"/>
-            <p style="margin-top: 10px; margin-bottom: 10px;">
-              We Use the allegro hand (16 DoF) with tactile sensors attached on the fingertips.
-            </p>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- <section class="section";>
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered" style="margin-bottom:40px";>Goal-Guided Training</h2>
-    <div class="columns is-centered">
-      <div class="column is-half">
-        <img src="./static/images/goal_rl.png"
-             class="interpolation-image"
-             alt="Interpolate start reference image."
-             style="width: 100%; height: auto;"/>
-      </div>
-      <div class="column is-half" style="display: flex; align-items: center;">
-        <p>
-          We Use the allegro hand (16 DoF) with tactile sensors attached on the fingertips.
-        </p>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
-<section class="section";>
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-sixths">
-          <h2 class="title is-3 has-text-centered" style="margin-bottom: 40px">Tactile Sim-to-Real via Feature Extraction</h2>
-          <img src="./static/images/sim_to_real_touch.drawio.png"
+          <h2 class="title is-3" style="margin-top: -50px;">Method Overview</h2>
+          <img src="./static/images/NT_framework.png"
                  class="interpolation-image"
-                 alt="Interpolate start reference image."
+                 alt="System overview."
                  style="margin-top: 10px; margin-bottom: 10px;"/>
           <p style="margin-top: 10px; margin-bottom: 10px; text-align: justify;">
-            We train observation models to bridge the tactile sim-to-real gap. Our observation models are trained on contact data of the sensor on a F/T sensor. 
-            We move the tactile sensor on a flat stimulus mounted above the F/T sensor, and collect tactile images along with the corresponding robot poses and contact forces as labels. 
-            We then train a CNN to extract the contact features that are used in simulation. The dense tactile features we consider are continous readings of contact pose and contact force. 
+            Real-time control architecture for NeuralTouch. A GPU-equipped PC handles high-level perception and policy
+            inference, while a real-time control PC and controller box execute deterministic low-level robot control.
+            The setup integrates an RGB-D camera, TacTip tactile sensors, and a Franka robot arm with gripper.
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-sixths">
+          <h2 class="title is-3 has-text-centered" style="margin-bottom: 40px">Tactile Sim-to-Real Transfer</h2>
+          <img src="./static/images/sim_exp_neuraltouch_00.png"
+                 class="interpolation-image"
+                  alt="Tactile sim-to-real transfer."
+                 style="margin-top: 10px; margin-bottom: 10px;"/>
+          <p style="margin-top: 10px; margin-bottom: 10px; text-align: justify;">
+            Example simulation experiments used in the paper to evaluate NeuralTouch across bottles, mugs, and bolt-style
+            peg tasks. The benchmark studies whether one descriptor-conditioned tactile policy can generalize across target
+            features and object categories while still supporting precise manipulation.
+          </p>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+          <h2 class="title is-3">Simulation Overview</h2>
+          <video id="sim_only_demo" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/sim_only.mp4"
+                    type="video/mp4">
+          </video>
+          <p style="margin-top: 10px; text-align: justify;">
+            Simulation-only overview of NeuralTouch across the paper's object categories and target features,
+            illustrating how the descriptor-conditioned tactile policy operates before transferring to real-world tasks.
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+          <h2 class="title is-3">Real-world Experiments with Different Objects</h2>
+          <video id="rw_objects_ketchup" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/ketchup.mp4"
+                    type="video/mp4">
+          </video>
+          <div style="margin-bottom: 24px;"></div>
+          <video id="rw_objects_green_bolt" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/green_bolt.mp4"
+                    type="video/mp4">
+          </video>
+          <!-- <div style="margin-bottom: 24px;"></div>
+          <video id="rw_objects_pink_bolt" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/pink_bolt.mp4"
+                    type="video/mp4">
+          </video> -->
+          <div style="margin-bottom: 24px;"></div>
+          <video id="rw_objects_plug" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/plug.mp4"
+                    type="video/mp4">
+          </video>
+          <p style="margin-top: 10px; text-align: justify;">
+            Real-world experiments with different objects, including ketchup bottle, green bolt, and adaptor plug,
+            demonstrating that NeuralTouch can maintain accurate grasp acquisition and robust manipulation across varied geometries.
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+          <h2 class="title is-3">Real-world Experiments with Bottle Lids of Various Shapes</h2>
+          <img src="./static/images/bottle_lids.png"
+                 class="interpolation-image"
+                 alt="Bottle lid shapes."
+                 style="margin-top: 10px; margin-bottom: 10px;"/>
+          <p style="margin-top: 10px; margin-bottom: 20px; text-align: justify;">
+            A diverse set of bottle lids with varying geometries and surface textures used to evaluate
+            the generalization ability of NeuralTouch in real-world bottle-cap opening.
           </p>
       </div>
     </div>
 
-    <div class="columns">
-      <div class="column is-8">
-        <video id="tactile_prediction" autoplay muted loop playsinline height="100%">
-          <source src="./static/videos/tactile_prediction.mov"
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-sixths">
+        <video id="multi_cap_demo_0" autoplay muted loop playsinline height="100%" controls>
+          <source src="./static/videos/mutli_cap_nt_0.mp4"
                   type="video/mp4">
         </video>
-      </div>
-      <div class="column is-4" style="display: flex; align-items: center; text-align: justify;">
-        <p>
-          A visualization of the dense tactile representation used for in-hand object rotation. 
-          The center of the shaded region on the dome represents the contact pose and the size of the shaded region represents the force.
+        <div style="margin-bottom: 24px;"></div>
+        <video id="multi_cap_demo_1" autoplay muted loop playsinline height="100%" controls>
+          <source src="./static/videos/mutli_cap_nt_1.mp4"
+                  type="video/mp4">
+        </video>
+        <p style="margin-top: 10px; text-align: justify;">
+          Real-world NeuralTouch demos on varied bottle-cap geometries, demonstrating generalization across cap shapes and
+          surface textures with robust contact correction and accurate lid grasping. Sample numbers refer to the lid numbers listed in the top figure in this session.
+        </p>
+        <div style="margin-bottom: 24px;"></div>
+        <video id="multi_cap_comparison_0" autoplay muted loop playsinline height="100%" controls>
+          <source src="./static/videos/mutli_cap_comparison_0.mp4"
+                  type="video/mp4">
+        </video>
+        <div style="margin-bottom: 24px;"></div>
+        <video id="multi_cap_comparison_1" autoplay muted loop playsinline height="100%" controls>
+          <source src="./static/videos/mutli_cap_comparison_1.mp4"
+                  type="video/mp4">
+        </video>
+        <div style="margin-bottom: 24px;"></div>
+        <video id="multi_cap_comparison_2" autoplay muted loop playsinline height="100%" controls>
+          <source src="./static/videos/mutli_cap_comparison_2.mp4"
+                  type="video/mp4">
+        </video>
+        <p style="margin-top: 10px; text-align: justify;">
+          Comparison videos for various-shape bottle lids showing the performance of NeuralTouch (ours), NDF,
+          NDF+TOUCH, C2FIL, and C2FIL+TOUCH on the same real-world task setup.
         </p>
       </div>
     </div>
@@ -425,15 +384,21 @@
 </section>
 
 
-<section class="section" >
+<section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-sixths">
-          <h2 class="title is-3">Unified policy for any chosen rotation axis</h2>
-          <video id="rand_axis" autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/rand_axis_cropped.mp4"
+          <h2 class="title is-3">Recovery against Perturbation with NeuralTouch</h2>
+          <video id="obj_tracking_demo" autoplay muted loop playsinline height="100%" controls>
+            <source src="./static/videos/obj_tracking.mp4"
                     type="video/mp4">
           </video>
+          <p style="margin-top: 10px; text-align: justify;">
+            The real-time performance and instant recovery of the tactile robot under perturbations demonstrate the robustness
+            of NeuralTouch and its applicability to tasks with consistent disturbances. The real tactile image streams are
+            shown in the first and third columns on the PC, while the simulated tactile image streams are shown in the second
+            and fourth columns.
+          </p>
       </div>
     </div>
   </div>
@@ -441,122 +406,82 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-sixths">
-          <h2 class="title is-3">Generalizing to unseen objects</h2>
-          <video id="rand_objects" autoplay muted loop playsinline height=100%">
-            <source src="./static/videos/rand_objects.mov"
-                    type="video/mp4">
-          </video>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-sixths">
-          <h2 class="title is-3">Robust to grasp disturbances</h2>
-          <video id="perturb" autoplay muted loop playsinline height=100%">
-            <source src="./static/videos/robust_perturbations.mov"
-                    type="video/mp4">
-          </video>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-sixths">
-          <h2 class="title is-3">Robust of changing gravity directions</h2>
-          <video id="gravity_demo" autoplay muted loop playsinline height="100%">
-            <source src="./static/videos/gravity_invarient_demo.mov"
-                    type="video/mp4">
-          </video>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Concurrent Work. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h2 class="title is-3">Related Articles</h2>
 
+
+
         <div class="content has-text-justified">
           <p style="margin-bottom: 5px;">
-            <strong>The future lies in a pair of tactile hands</strong>
+            <strong>SimShear: Sim-to-Real Shear-based Tactile Servoing</strong>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-          Nathan F. Lepora
+            Kipp McAdam Freud, Yijiong Lin, Nathan F. Lepora
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <i>Science Robotics 9 (91)</i>
+            <i>Conference on Robot Learning (CoRL) 2025</i>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <a href="https://www.science.org/doi/full/10.1126/scirobotics.adq1501"><em>Article</em></a>  
+            <a href="https://arxiv.org/abs/2508.20561"><em>arXiv</em></a>
           </p>
         </div>
 
         <div class="content has-text-justified">
           <p style="margin-bottom: 5px;">
-            <strong>Sim-to-Real Model-Based and Model-Free Deep Reinforcement Learning for Tactile Pushing</strong>
+            <strong>AnyRotate: Gravity-Invariant In-Hand Object Rotation with Sim-to-Real Touch</strong>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-          <strong>Max Yang</strong>, Yijiong Lin, Alex Church, John Lloyd, Dandan Zhang, David A.W. Barton, Nathan F. Lepora
+            Max Yang, Chenghua Lu, Alex Church, Yijiong Lin, Chris Ford, Haoran Li, Efi Psomopoulou, David A.W. Barton, Nathan F. Lepora
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <i>Conference on Robot Learning (CoRL) 2024</i>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <a href="https://arxiv.org/abs/2405.07391"><em>arXiv</em></a>
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <p style="margin-bottom: 5px;">
+            <strong>Bi-Touch: Bimanual Tactile Manipulation With Sim-to-Real Deep Reinforcement Learning</strong>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            Yijiong Lin, Alex Church, Max Yang, Haoran Li, John Lloyd, Dandan Zhang, Nathan F. Lepora
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
             <i>IEEE Robotics and Automation Letters (RA-L) 2023</i>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <a href="https://ieeexplore.ieee.org/document/10182274"><em>Paper</em></a> /  
-            <a href="https://arxiv.org/abs/2307.14272"><em>arXiv</em></a> /
-            <a href="https://sites.google.com/view/tactile-rl-pushing/"><em>Project Page</em></a>
-           
+            <a href="https://ieeexplore.ieee.org/abstract/document/10184426"><em>Paper</em></a>
           </p>
         </div>
+        
       </div>
     </div>
-    <!--/ Concurrent Work. -->
-
   </div>
 </section>
 
-
-<!-- <section class="section" id="BibTeX">
+<section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <pre><code>@article{lin2026neuraltouch,
+  title   = {NeuralTouch: Neural Descriptors for Precise Sim-to-Real Tactile Robot Control},
+  author  = {Lin, Yijiong and Deng, Bowen and Pu, Keju and Lu, Chenghua and Yang, Max and Psomopoulou, Efi and Lepora, Nathan F.},
+  journal = {To be added},
+  year    = {2026}
 }</code></pre>
   </div>
-</section> -->
+</section>
 
 
 <footer class="footer" style="padding: 1rem 1rem 2rem; margin-top: 0;">
   <div class="container">
     <div class="content has-text-centered">
-      <!-- <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a> -->
-      <!-- <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a> -->
     </div>
     <div class="columns is-centered">
       <div class="content">
         <p>
-          The website uses the <a href="https://github.com/nerfies/nerfies.github.io">nerflies</a> template.
+          The website uses the <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a> template.
         </p>
       </div>
     </div>
