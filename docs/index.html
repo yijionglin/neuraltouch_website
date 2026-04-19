@@ -122,6 +122,26 @@
 
   .hero-video-background .publication-authors a {
     color: #ffffff !important;
+    text-decoration: underline;
+  }
+
+  .publication-journal {
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 6px;
+  }
+
+  .publication-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.22);
+    color: #ffffff;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 </style>
 
@@ -138,17 +158,25 @@
         <div class="column has-text-centered">
           <h1 class="title is-2 publication-title">NeuralTouch: Neural Descriptors for Precise Sim-to-Real Tactile Robot Control</h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block" style="margin-right: 5px;">Yijiong Lin,</span>
-            <span class="author-block" style="margin-right: 5px;">Bowen Deng,</span>
-            <span class="author-block" style="margin-right: 5px;">Keju Pu,</span>
-            <span class="author-block" style="margin-right: 5px;">Chenghua Lu,</span>
-            <span class="author-block" style="margin-right: 5px;">Max Yang,</span>
-            <span class="author-block" style="margin-right: 5px;">Efi Psomopoulou,</span>
-            <span class="author-block" style="margin-right: 5px;">Nathan F. Lepora</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://yijionglin.github.io/">Yijiong Lin*</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://scholar.google.com/citations?user=Ynh0YqoAAAAJ&hl=en&oi=ao">Bowen Deng</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://research-information.bris.ac.uk/en/persons/keju-pu/">Keju Pu</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://scholar.google.com/citations?user=aXnQjHoAAAAJ&hl=en&oi=ao">Chenghua Lu</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://maxyang27896.github.io/">Max Yang</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://scholar.google.com/citations?user=kVyW-LEAAAAJ&hl=en">Efi Psomopoulou</a>,</span>
+            <span class="author-block" style="margin-right: 5px;"><a href="https://scholar.google.com/citations?user=fb2WiJgAAAAJ&hl=en">Nathan F. Lepora</a></span>
           </div>
 
           <div class="is-size-5 publication-authors" style="margin-bottom: 5px;">
             <span class="author-block">Department of Engineering Mathematics and Bristol Robotics Laboratory, University of Bristol</span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-bottom: 5px;">
+            <span class="author-block">* Corresponding author: yijiong.lin at bristol.ac.uk</span>
+          </div>
+
+          <div class="is-size-5 publication-authors publication-journal">
+            <span class="author-block"><b><i>IEEE/ASME Transactions on Mechatronics (TMECH)</i></b></span>
           </div>
 
           <div class="column has-text-centered">
@@ -244,14 +272,20 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-sixths">
           <h2 class="title is-3" style="margin-top: -50px;">Method Overview</h2>
-          <img src="./static/images/NT_framework.png"
+          <img src="./static/images/vertical_NT_framework_0.png"
+                 class="interpolation-image"
+                 alt="System overview."
+                 style="margin-top: 10px; margin-bottom: 10px;"/>
+          <img src="./static/images/vertical_NT_framework_1.png"
                  class="interpolation-image"
                  alt="System overview."
                  style="margin-top: 10px; margin-bottom: 10px;"/>
           <p style="margin-top: 10px; margin-bottom: 10px; text-align: justify;">
-            Real-time control architecture for NeuralTouch. A GPU-equipped PC handles high-level perception and policy
-            inference, while a real-time control PC and controller box execute deterministic low-level robot control.
-            The setup integrates an RGB-D camera, TacTip tactile sensors, and a Franka robot arm with gripper.
+            Overview of the NeuralTouch: In simulation, we first pre-train an occupancy network which is the core component of the Neural Pose Descriptor
+Fields. Secondly, we collect human demonstrations along with object point clouds and robot target grasping pose descriptors depending on the manipulation
+tasks. Thirdly, we train an RL policy with tactile and proprioceptive feedback, to achieve fine grasping poses implicitly specified by these collected descriptors.
+After obtaining the NPDF and a well-trained policy, our system is directly deployed in the real world with a real-to-sim tactile transfer to accurately grasp
+unseen objects, executing manipulation tasks such as unplugging a bolt-like USB and inserting it into a socket.
           </p>
       </div>
     </div>
@@ -417,15 +451,48 @@
             <strong>SimShear: Sim-to-Real Shear-based Tactile Servoing</strong>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            Kipp McAdam Freud, Yijiong Lin, Nathan F. Lepora
+            Kipp McAdam Freud*, Yijiong Lin*, Nathan F. Lepora
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
             <i>Conference on Robot Learning (CoRL) 2025</i>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <a href="https://arxiv.org/abs/2508.20561"><em>arXiv</em></a>
+            <a href="https://arxiv.org/abs/2508.20561"><em>Paper, </em></a>
+            <a href="https://yijionglin.github.io/simshear/"><em>Project Page</em></a>
           </p>
         </div>
+
+        <div class="content has-text-justified">
+          <p style="margin-bottom: 5px;">
+            <strong>Text2Touch: Tactile In-Hand Manipulation with LLM-Designed Reward Functions</strong>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            Harrison Field, Max Yang, Yijiong Lin, Efi Psomopoulou, David Barton, Nathan F. Lepora
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <i>Conference on Robot Learning (CoRL) 2025</i>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <a href="https://proceedings.mlr.press/v305/field25a.html"><em>Paper, </em></a>
+            <a href="https://hpfield.github.io/text2touch-website/"><em>Project Page</em></a>
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <p style="margin-bottom: 5px;">
+            <strong>Tactile softhand-a: 3d-printed, tactile, highly-underactuated, anthropomorphic robot hand with an antagonistic tendon mechanism</strong>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            Haoran Li, Christopher J Ford, Chenghua Lu, Yijiong Lin, Matteo Bianchi, Manuel G Catalano, Efi Psomopoulou, Nathan F Lepora
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <i>The International Journal of Robotics Research (IJRR)</i>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <a href="https://journals.sagepub.com/doi/pdf/10.1177/02783649251379516"><em>Paper, </em></a>
+            <a href="https://github.com/HaoranLi-Data/Tactile_SoftHand_A"><em>Project Page</em></a>
+          </p>
+        </div> 
 
         <div class="content has-text-justified">
           <p style="margin-bottom: 5px;">
@@ -438,9 +505,11 @@
             <i>Conference on Robot Learning (CoRL) 2024</i>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <a href="https://arxiv.org/abs/2405.07391"><em>arXiv</em></a>
+            <a href="https://arxiv.org/abs/2405.07391"><em>Paper, </em></a>
+            <a href="https://maxyang27896.github.io/anyrotate/"><em>Project Page</em></a>
           </p>
-        </div>
+        </div> 
+
         <div class="content has-text-justified">
           <p style="margin-bottom: 5px;">
             <strong>Bi-Touch: Bimanual Tactile Manipulation With Sim-to-Real Deep Reinforcement Learning</strong>
@@ -452,10 +521,27 @@
             <i>IEEE Robotics and Automation Letters (RA-L) 2023</i>
           </p>
           <p style="margin-bottom: 5px; font-size: 0.9em;">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10184426"><em>Paper</em></a>
+            <a href="https://ieeexplore.ieee.org/abstract/document/10184426"><em>Paper, </em></a>
+            <a href="https://sites.google.com/view/bi-touch/"><em>Project Page</em></a>
           </p>
         </div>
         
+        <div class="content has-text-justified">
+          <p style="margin-bottom: 5px;">
+            <strong>Tactile Gym 2.0: Sim-to-real Deep Reinforcement Learning for Comparing Low-cost High-Resolution Robot Touch</strong>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            Yijiong Lin, John Lloyd, Alex Church, Nathan F. Lepora
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <i>IEEE Robotics and Automation Letters (RA-L) 2022</i>
+          </p>
+          <p style="margin-bottom: 5px; font-size: 0.9em;">
+            <a href="https://arxiv.org/abs/2207.10763"><em>Paper, </em></a>
+            <a href="https://sites.google.com/view/tactile-gym-2-0-multi-sensor/home"><em>Project Page</em></a>
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
